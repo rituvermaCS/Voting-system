@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	{% load static %}
+	{% include 'css.html' %}
+	   <title>Index</title>
+        <style>
+	.bg-primary{
+		background-color: #000000!important;
+	}
+	.navbar-light .navbar-nav .nav-link {
+    color: white;
+	}
+	.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+		color: #ffc107;
+	}
+	.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+		color: black;
+		background-color:red;
+		border-radius:3px;
+	}
+	.navbar-nav .nav-link {
+	padding-right: 2.6rem!important;
+	padding-left: 2.6rem!important;
+	font-size:14px;
+	}
+        </style>
+    </head>
+    <body>
+	{% include 'menu.html' %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          <h4 class="text-left p-3">Welcome to Online Voting Website!</h4>
+		  <p class="text-justify p-3">
+		  The Project "OnLine Voting" aims at making the voting process easy and cooperative 
+          Socities. Presently voting is performed using ballot paper and the counting is done 
+          manually, Hence it consumes a lot time. There can be possibility of invalid Votes. All 
+          these makes election a tedious task, In our proposed system voting and counting is done 
+          with the help of computer. It saves time, avoid error in counting and there will be no 
+          Invalid Votes. It makes the election process easy.		  
+<br><br>
+This project is to develop a general purpose "OnLine Voting" where any one can cast vote but only
+once, after their approval by admin from the comfort of home through the Internet. An online
+ voting is a virtual voting system on the Internet where voter can browse the candidate in catalog
+ and select candidate of Interest, The selected candidate may be get vote from voter. 
+ <br><br>
+ From Voting Team</p>
+		  <div class="card mt-3 mb-3" style="height:120px;">
+		  <p>This Online Voting website is developed to give benefits to everyone.</p>
+		  <p><a href="{% url 'votingregistration' %}">Register here on free of cost</a></p>
+		  <p><a href="{% url 'login' %}">You may Login from there!</a></p>
+		  </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mt-3" style="width:300px;">
+		<div class="card-header bg-info text-white">
+		<b>News & Events</b>
+		</div>
+            <div class="p-2" style="height:250px;">
+			<marquee direction="up" onmouseover="this.stop();" onmouseout="this.start();">
+			{% for news_row in news_record %}
+			<p><a href="{{news_row.news_link}}">{{news_row.news_link}}</a></p>
+			<hr>
+			{% endfor %}
+			</marquee>
+			</div>
+      </div>
+	  <div class="card mt-4 mb-4" style="width:300px;">
+		<div class="card-header">
+		<b>Check Status</b>
+		</div>
+ <div class="p-2" style="height:180px;">
+ <form method="POST" action="{% url 'index' %}">
+  <div class="form-group">
+    <label for="exampleInputText1">Enter Your Voter Id:</label>
+    <input type="text" name="voter" class="form-control" id="exampleInputText1">
+  </div>
+  <button><a href="{% url 'view_result' %}">SUBMIT</a></button>
+ </form>
+ </div>
+      </div>
+	  <div class="text-center mb-3"><a href="{% url 'login' %}">Login Here!!</a></div>
+    </div>
+  </div>
+{% include 'footer.html' %} 
+{% include 'js.html' %} 
+	</body>
+</html>

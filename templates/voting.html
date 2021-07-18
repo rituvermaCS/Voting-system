@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	{% load static %}
+	{% include 'css.html' %}
+	   <title>Voting</title>
+        <style>
+	.bg-primary{
+		background-color: #000000!important;
+	}
+	.navbar-light .navbar-nav .nav-link {
+    color: white;
+	}
+	.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+		color: #ffc107;
+	}
+	.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+		color: black;
+		background-color:red;
+		border-radius:3px;
+	}
+	.navbar-nav .nav-link {
+	padding-right: 2.6rem!important;
+	padding-left: 2.6rem!important;
+	font-size:14px;
+	}
+        </style>
+    </head>
+    <body>
+	{% include 'menu.html' %}
+	  <div class="container">
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10 mt-3 mb-3">
+	<div class="card p-5">
+	<h4 class="text-center">Voting Panel</h4>
+	<hr>
+	<form action="{% url 'voting' %}" method="POST">
+	{% csrf_token %}
+  <center>
+  <table>
+			 <tr><td>Select Your Area *:</td><td>
+			 <select type="text" class="form-control" id="exampleInputText1"/>
+			 {% for res_row in v_record %}
+	         <option value="{{res_row.area}}">{{res_row.area}}</option>
+	         {% endfor %}
+	         </select>
+            </td></tr>
+  </table>	
+  <br><br>
+  <button type="submit" class="btn btn-secondary">SUBMIT QUERY</button>
+  </center>
+</form>
+</div>
+<div class="row">
+	<table class="table">
+	<tr>
+	<th scope="col">#S.No.</th>
+	<th scope="col">Candidate Name</th>
+	<th scope="col">Party</th>
+	<th scope="col">Area</th>
+	<th scope="col">Pictures</th>
+	<th scope="col">Cast Vote</th>
+	</tr>
+	{% for s_row in show_result %}
+   <tr>
+  <td>{{forloop.counter}}</td>
+  <td>{{s_row.candidate_name}}</td>
+  <td>{{s_row.party}}</td>
+  <td>{{s_row.area}}</td>
+  <td><a href="{{s_row.candidate_photo}}">{{s_row.candidate_photo}}</a></td>
+  <td><button class="badge bg-warning"><a href="#">Vote</a></button></td>
+  </tr>
+  {% endfor %}
+	</table>
+	</div>
+	</div>
+	<div class="col-md-1"></div>
+	</div>
+	</div> 
+{% include 'footer.html' %} 
+{% include 'js.html' %} 
+	</body>
+</html>

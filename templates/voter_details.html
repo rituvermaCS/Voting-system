@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	{% load static %}
+	{% include 'css.html' %}
+	   <title>Voter Details</title>
+        <style>
+	.bg-primary{
+		background-color: #000000!important;
+	}
+	.navbar-light .navbar-nav .nav-link {
+    color: white;
+	}
+	.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+		color: #ffc107;
+	}
+	.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+		color: black;
+		background-color:red;
+		border-radius:3px;
+	}
+	.navbar-nav .nav-link {
+	padding-right: 2.6rem!important;
+	padding-left: 2.6rem!important;
+	font-size:14px;
+	}
+        </style>
+    </head>
+    <body>
+	{% include 'menu.html' %}
+	 <div class="container">
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10 mt-3 mb-3">
+	<div class="card p-5">
+	<h4 class="text-center">Voter Details Panel</h4>
+	<hr>
+	<form action="{% url 'voter_details' %}" method="POST">
+	{% csrf_token %}
+	<div class="row">
+	<table class="table">
+	<thead class="table-secondary">
+	<tr>
+	<th scope="col">#S.No.</th>
+	<th scope="col">Voter Id</th>
+	<th scope="col">Phone</th>
+	<th scope="col">State</th>
+	<th scope="col">Country</th>
+	<th scope="col">ID Copy</th>
+	<th scope="col">View Pic</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for r_row in reg_record %}
+	<tr>
+	<th scope="row">{{forloop.counter}}</th>
+	<td>{{r_row.voter_id}}</td>
+	<td>{{r_row.phone}}</td>
+	<td>{{r_row.state}}</td>
+	<td>{{r_row.country}}</td>
+	<td>{{r_row.copy}}</td>
+	<td><a href="{{candidate_photo}}" class="btn btn-success btn-sm">View Pic</a>
+	    <a href="{% url 'delete_details' r_row.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+	</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+	</div>
+</form>
+</div>
+	</div>
+	<div class="col-md-1"></div>
+	</div>
+	</div> 
+	  
+{% include 'footer.html' %} 
+{% include 'js.html' %} 
+	</body>
+</html>

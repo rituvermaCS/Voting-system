@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	{% load static %}
+	{% include 'css.html' %}
+	   <title>Contact</title>
+        <style>
+	.bg-primary{
+		background-color: #000000!important;
+	}
+	.navbar-light .navbar-nav .nav-link {
+    color: white;
+	}
+	.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+		color: #ffc107;
+	}
+	.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+		color: black;
+		background-color:red;
+		border-radius:3px;
+	}
+	.navbar-nav .nav-link {
+	padding-right: 2.6rem!important;
+	padding-left: 2.6rem!important;
+	font-size:14px;
+	}
+        </style>
+    </head>
+    <body>
+	{% include 'menu.html' %}
+	<div class="container">
+	<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10 mt-3 mb-3">
+	<div class="card p-5">
+	<h4 class="text-center">Contact Us</h4>
+	<hr>
+	<form action="{% url 'contact' %}" method="POST">
+	{% for msg in messages %}
+	<div class="alert alert-{{msg.tags}}">{{msg}}</div>
+	{% endfor %}
+	{% csrf_token %}
+<center>
+  <table>
+			 <tr><td>Name*:</td><td><input type="text" name="contact_name" class="form-control" id="exampleInputText1"/>
+            </td></tr>
+			<tr><td>Mobile No.*:</td><td><input type="text" name="contact_phone" class="form-control" id="exampleInputText1"/>
+            </td></tr>
+			<tr><td>Email Id*:</td><td><input type="text" name="contact_email" class="form-control" id="exampleInputText1"/>
+            </td></tr>
+			<tr><td>Address*:</td><td><textarea type="text" name="contact_address" class="form-control" id="exampleInputText1" rows="3" cols="40"></textarea>
+            </td></tr>
+			<tr><td>Query*:</td><td><textarea type="text" name="contact_query" class="form-control" id="exampleInputText1" rows="2" cols="40"></textarea>
+            </td></tr>
+  </table>
+  <br><br>
+  <button type="submit" class="btn btn-secondary">SUBMIT FORM</button>
+  <button type="reset" class="btn btn-secondary">RESET</button>
+  </center>
+</form>
+</div>
+	</div>
+	<div class="col-md-1"></div>
+	</div>
+	</div> 
+	 
+{% include 'footer.html' %} 
+{% include 'js.html' %} 
+	</body>
+</html>
